@@ -1,0 +1,9 @@
+{
+  "name": "jalli-contract-analysis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "جَلّي — intelligent Arabic contract analysis (static UI + Vercel serverless Anthropic proxy)",
+  "scripts": {
+    "test": "node tests/verification.test.js"
+  }
+}
