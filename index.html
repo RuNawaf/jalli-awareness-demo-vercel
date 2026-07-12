@@ -787,8 +787,8 @@ async function callClaude(promptText, signal) {
       signal: timeoutCtrl.signal,
       body: JSON.stringify({
         messages: [{ role: "user", content: promptText }],
-        max_tokens: 5000,
-        analysisId: S.analysisId
+max_tokens: 12000
+  analysisId: S.analysisId
       })
     });
     timedOut = false;
