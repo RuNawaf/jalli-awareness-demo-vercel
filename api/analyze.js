@@ -25,7 +25,7 @@ const DEFAULT_MODEL = "claude-sonnet-5";
 
 const MAX_BODY_BYTES = 400_000;
 const MAX_PROMPT_CHARS = 200_000;
-const MAX_TOKENS_LIMIT = 8_192;
+const MAX_TOKENS_LIMIT = 16_000;
 const UPSTREAM_TIMEOUT_MS = 120_000;
 
 /**
@@ -420,11 +420,18 @@ module.exports = async function handler(req, res) {
         "x-api-key": apiKey,
         "anthropic-version": ANTHROPIC_VERSION
       },
-      body: JSON.stringify({
-        model,
-        max_tokens: maxTokens,
-        messages
-      })
+     body: JSON.stringify({
+  model,
+  max_tokens: maxTokens,
+
+  // التحليل هنا استخراج منظم ولا يحتاج تفكيرًا طويلًا.
+  // تعطيله يقلل التكلفة ويمنع استهلاك حد الإخراج قبل اكتمال JSON.
+  thinking: {
+    type: "disabled"
+  },
+
+  messages
+})
     });
   } catch (error) {
     clearTimeout(timer);
