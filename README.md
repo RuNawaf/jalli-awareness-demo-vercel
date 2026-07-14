@@ -1,4 +1,4 @@
-# جَلّي — Intelligent Arabic Contract Analysis
+# جَلِيّ (JALIY) — Intelligent Arabic Contract Analysis
 
 A production-deployable contract analysis application: a self-contained static frontend (`index.html`) plus a secure Vercel serverless backend that proxies requests to the Anthropic API. The API key lives **only** in server-side environment variables — it never appears in the browser, the HTML, the JavaScript bundle, or this repository.
 
@@ -21,8 +21,11 @@ The frontend extracts text from PDF / DOCX / TXT / images (with Arabic+English O
 ## Project structure
 
 ```text
-jalli/
-├── index.html                 # complete frontend: design system + extraction + analysis UI
+jaliy/
+├── index.html                 # complete frontend: bilingual (AR/EN) design system + embedded logos + extraction + analysis UI
+├── assets/
+│   ├── jaliy-logo-ar.png      # Arabic logo (جَلِيّ) — transparent, shown when UI language is Arabic
+│   └── jaliy-logo-en.png      # English logo (JALIY) — transparent, shown when UI language is English
 ├── README.md                  # this file
 ├── package.json               # npm test script (no frontend framework, no dependencies)
 ├── vercel.json                # security headers; static + /api routing (Vercel defaults)
@@ -34,6 +37,10 @@ jalli/
 └── tests/
     └── verification.test.js   # anti-hallucination + deployment/security tests (37 assertions)
 ```
+
+## Language & branding
+
+The UI is fully bilingual. The language button in the top bar switches instantly between Arabic (RTL, default) and English (LTR) with no page reload; the brand logo swaps with the language (Arabic جَلِيّ logo ⇄ English JALIY logo — both embedded directly in `index.html` as data URIs, so they always render even without the `assets/` folder; the full-resolution originals remain in `assets/` for brand use), all interface text, progress stages, result labels, and error messages are translated, and the choice is remembered locally. AI explanations are produced in the interface language active at analysis time, while every `sourceText` quote stays verbatim from the contract.
 
 ## Required environment variables (server-side only, set in Vercel)
 
